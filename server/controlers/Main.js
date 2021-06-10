@@ -1,4 +1,5 @@
 const usersDb = require('../schemas/UserSchema')
+const itemDb = require('../schemas/ItemSchema')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
@@ -26,7 +27,6 @@ module.exports = {
                 users.email = userEmail
                 users.password1 = passwordHash
                 users.password2 = userPsw2
-
                 users.save().then(data => {
                     res.send({success: true})
                 })
@@ -44,7 +44,6 @@ module.exports = {
 
         let passwordHash
 
-        console.log(req.body)
 
         bcrypt.genSalt(saltRounds, function (err, salt) {
             if (err) return next(err)
@@ -57,7 +56,7 @@ module.exports = {
                 if (err) return next(err);
                 bcrypt.compare(userPswLogin, findUser.password1, function (err, resSend) {
                     if (resSend) {
-                        res.send({success: true})
+                        res.send({success: true, email: userLogin})
                     } else {
                         res.send({success: false})
                     }
@@ -66,5 +65,35 @@ module.exports = {
         })
 
 
+    },
+
+    itemValue: async (req, res) => {
+        const {
+            item,
+            loginEmail,
+        } = req.body
+
+        const items = new itemDb
+        items.item = item
+        items.clientEmail = loginEmail
+        const findItem = await itemDb.find({clientEmail: loginEmail})
+        // console.log(findItem[0]._id)
+
+        items.save().then(async data => {
+            // const findAll = await itemDb.find()
+            // res.send({success: true, findAll, item, itemValue: findItem[0]._id})
+
+            res.send({success: true, findItem})
+
+        })
+    },
+    getClientList: async (req, res) => {
+        const {
+            loginEmail,
+        } = req.body
+
+        const findItems = await itemDb.find({clientEmail: loginEmail})
+        res.send({findItems})
     }
+
 }

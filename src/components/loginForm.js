@@ -2,6 +2,8 @@ import React, {useRef, useState} from 'react';
 import {BoxContainer, FormContainer, Input, SubmitButton, MutedLink, BoldLink} from "./StylesForAcc";
 import {Marginers} from "../components/marginer/index"
 import http from "../plugins/Fetch"
+import {useHistory} from "react-router-dom"
+
 
 const LoginForm = ({trigger}) => {
 
@@ -12,23 +14,34 @@ const LoginForm = ({trigger}) => {
     const [err2, setError2] = useState([])
     const [errMsg, setErrMsg] = useState("")
 
+    const history = useHistory()
+
     function loginBtn() {
 
         const data2 = {
+
+            userLoginEmail: localStorage.getItem("keyBase"),
             userLogin: loginEmailRef.current.value,
             userPswLogin: loginPasswordRef.current.value,
         }
         http.post('/loginUser', data2).then(res => {
             setData2(res)
+            console.log(res)
+            localStorage.setItem("keyBase", res.email)
+
+
         })
         http.post('/loginUser', data2).then(res => {
             setError2(res)
-            console.log(res)
+
         })
 
-        if(data2.userPswLogin === "" && data2.userLogin === "") {
+        if (data2.userPswLogin === "" && data2.userLogin === "") {
             setErrMsg("Fields are required")
             return
+        }
+        if (data2.userLogin && data2.userPswLogin) {
+            history.push('/Home')
         }
 
 

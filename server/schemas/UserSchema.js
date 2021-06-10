@@ -18,7 +18,7 @@ const usersSchema = new Schema({
     password2: {
         type: String,
         required: true
-    }
+    },
 
 })
 
@@ -26,3 +26,5 @@ const usersSchema = new Schema({
 
 
 module.exports = mongoose.model("createUserInDb", usersSchema)
+
+

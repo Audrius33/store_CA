@@ -107,7 +107,7 @@ const AccountBox = () => {
         }, 400)
     }
     const switchToSignIn = () => {
-        console.log("yes")
+
         playExpandingAnimation();
         setTimeout(() => {
             setActive("signIn")
