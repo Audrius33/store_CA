@@ -19,8 +19,6 @@ body {
 /* HEADER */
 header {
     padding: 20px 0 10px 0;
-    background: rgb(227, 230, 147);
-    background: linear-gradient(63deg, rgba(227, 230, 147, 1) 0%, rgba(236, 190, 35, 1) 45%, rgba(242, 203, 41, 1) 100%, rgba(0, 212, 255, 1) 100%);
     text-align: center;
     width: 100%;
 }
@@ -51,7 +49,7 @@ main {
     border: none;
     color: rgba(0, 0, 0, 0.87);
     font-size: 1.3rem;
-
+    margin-top: 10px;
 }
 
 .submission-line__input::placeholder {
@@ -80,7 +78,8 @@ main {
 
 .submission-line__input,
 .submission-line__btn {
-    margin-bottom: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* List, list items, and list item buttons */
@@ -137,6 +136,7 @@ main {
 .list__check-btn--checked {
     color: rgba(0, 0, 0, 0.38);
 }
+
 .mr {
     margin-left: 5px;
 }
