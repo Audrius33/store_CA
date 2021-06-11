@@ -26,4 +26,4 @@ Marginers.defaultProps = {
     direction: "horizontal",
 };
 
-export { Marginers};
+export {Marginers};

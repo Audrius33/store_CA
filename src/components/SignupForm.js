@@ -29,10 +29,7 @@ const SignupForm = () => {
             setError(res.message)
 
         })
-        // http.post('/sendError', data).then(res => {
-        //     setError(res.message)
-        //     console.log(res.message)
-        // })
+
     }
 
 

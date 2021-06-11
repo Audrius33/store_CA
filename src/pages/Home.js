@@ -3,10 +3,10 @@ import './Home.css'
 import http from "../plugins/Fetch";
 import CreateIcon from '@material-ui/icons/Create';
 import ClearIcon from '@material-ui/icons/Clear';
+import {BoxContainer} from "../components/StylesForAcc";
 
 
 const Home = () => {
-
 
     const addItem = useRef()
     const updateItemValue = useRef()
@@ -14,7 +14,7 @@ const Home = () => {
     const [items, addItems] = useState([])
     const [showBtn, setShowBtn] = useState(false)
     const [itemIndex, setItemIndex] = useState(0)
-
+    const [error2, setError2] = useState("")
 
     useEffect(() => {
         const itemData2 = {
@@ -34,11 +34,10 @@ const Home = () => {
 
         http.post('/itemValue', itemData).then(res => {
             addItems(res.findItem)
-            console.log(res.findItem)
+            setError2(res.message)
+            console.log(res.message)
         })
     }
-
-    /*{items[2].clientEmail}*/
 
     function removeValue(id) {
         http.get('/removeItem/' + id).then(res => {
@@ -77,13 +76,13 @@ const Home = () => {
 
     }
 
-    // 94line instead ref use onChange={e => itemNewText(e.target.value)} and call a function 54
+    // 94line instead ref use onChange={e => itemNewText(e.target.value)} and call a function 52
 
     return (
         <body>
         <header>
             <div className="container">
-                <h3 className="header__username">Vartotojas</h3>
+                <h3 className="header__username">User: {window.localStorage.getItem('keyBase')}</h3>
                 <h1 className="header__title">Shopping List</h1>
             </div>
             <button onClick={logClientOut}>logOut</button>
@@ -92,7 +91,9 @@ const Home = () => {
             <div className="main">
                 <input className="submission-line__input" type="text" maxLength="20" ref={addItem}/>
                 <button className="submission-line__btn" onClick={itemValue}>Add</button>
-                <ul className="list">
+                <div className="errorMsg2" style={{color: "red"}}>{error2}</div>
+
+                { !!items ?  <ul className="list">
                     {items.map((item, index) =>
                         <li key={index}>
                             <p className="list__item"><a className="list__delete-btn"
@@ -104,7 +105,7 @@ const Home = () => {
                         <input className="list__item" style={{color: "white"}} type="text" placeholder="New Product"  ref={updateItemValue}/>
                         <button className="mr" onClick={sendNewValue}>Edit</button>
                     </div> : null}
-                </ul>
+                </ul> : null }
 
             </div>
         </div>

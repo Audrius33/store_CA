@@ -44,7 +44,6 @@ const LoginForm = ({trigger}) => {
 
     }
 
-
     return <BoxContainer>
         <FormContainer>
             <Input ref={loginEmailRef} type="email" placeholder="Email"/>
