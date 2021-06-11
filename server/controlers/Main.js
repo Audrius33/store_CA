@@ -5,7 +5,6 @@ const saltRounds = 10
 
 module.exports = {
     saveUser: async (req, res) => {
-
         const {
             userName,
             userEmail,
@@ -36,14 +35,12 @@ module.exports = {
 
     },
     findUser: async (req, res) => {
-
         const {
             userLogin,
             userPswLogin
         } = req.body
 
         let passwordHash
-
 
         bcrypt.genSalt(saltRounds, function (err, salt) {
             if (err) return next(err)
@@ -94,6 +91,19 @@ module.exports = {
 
         const findItems = await itemDb.find({clientEmail: loginEmail})
         res.send({findItems})
+    },
+    removeItem: async (req, res) => {
+        await itemDb.findOneAndDelete({_id: req.params.id})
+        let allItems = await itemDb.find()
+        res.send({success: true, allItems, message: "item was deleted"})
+    },
+    updateItem: async (req, res) => {
+        console.log(req.body)
+        const {id, item, clientEmail, newValue} = req.body
+
+        await itemDb.findOneAndUpdate({_id: id}, {$set: {item: newValue}})
+        let oneItem = await itemDb.find()
+        res.send({success: true, oneItem})
     }
 
 }

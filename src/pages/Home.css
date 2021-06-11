@@ -137,4 +137,7 @@ main {
 .list__check-btn--checked {
     color: rgba(0, 0, 0, 0.38);
 }
+.mr {
+    margin-left: 5px;
+}
 

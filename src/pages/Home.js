@@ -1,14 +1,19 @@
 import React, {useState, useRef, useEffect} from 'react';
 import './Home.css'
 import http from "../plugins/Fetch";
+import CreateIcon from '@material-ui/icons/Create';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 const Home = () => {
 
 
     const addItem = useRef()
+    const updateItemValue = useRef()
 
     const [items, addItems] = useState([])
+    const [showBtn, setShowBtn] = useState(false)
+    const [itemIndex, setItemIndex] = useState(0)
 
 
     useEffect(() => {
@@ -17,9 +22,9 @@ const Home = () => {
         }
         http.post('/getItems', itemData2).then(res => {
             addItems(res.findItems)
-            console.log(res)
         })
-    }, [])
+    }, [items])
+
 
     function itemValue() {
         const itemData = {
@@ -29,17 +34,59 @@ const Home = () => {
 
         http.post('/itemValue', itemData).then(res => {
             addItems(res.findItem)
+            console.log(res.findItem)
         })
     }
 
+    /*{items[2].clientEmail}*/
+
+    function removeValue(id) {
+        http.get('/removeItem/' + id).then(res => {
+            addItems(res.allItems)
+        })
+    }
+
+    function show(index) {
+        setItemIndex(index)
+        setShowBtn(!showBtn)
+    }
+
+    // function itemNewText(value) {
+    //
+    //     let changeItemValue = items
+    //     changeItemValue[itemIndex].item = value
+    //     addItems([...changeItemValue])
+    //     console.log([...changeItemValue][1])
+    // }
+
+    function sendNewValue() {
+
+        const itemToSend = {
+            clientInfo: items[itemIndex],
+            newValue: updateItemValue.current.value
+        }
+
+        http.post('/changeItemValue', itemToSend ).then(res => {
+            addItems(res.oneItem)
+            console.log(res.oneItem)
+        })
+    }
+
+    function logClientOut() {
+        window.localStorage.removeItem('keyBase');
+
+    }
+
+    // 94line instead ref use onChange={e => itemNewText(e.target.value)} and call a function 54
 
     return (
         <body>
         <header>
             <div className="container">
-                <h3 className="header__username">Audriaus</h3>
+                <h3 className="header__username">Vartotojas</h3>
                 <h1 className="header__title">Shopping List</h1>
             </div>
+            <button onClick={logClientOut}>logOut</button>
         </header>
         <div className="container">
             <div className="main">
@@ -48,11 +95,17 @@ const Home = () => {
                 <ul className="list">
                     {items.map((item, index) =>
                         <li key={index}>
-                            <p className="list__item"><a className="list__delete-btn">X</a>{item.item}<a
-                                className="list__check-btn">✔</a></p>
+                            <p className="list__item"><a className="list__delete-btn"
+                                                         onClick={() => removeValue(item._id)}><ClearIcon/></a>{item.item}<a
+                                className="list__check-btn" onClick={() => show(index)}><CreateIcon/></a></p>
                         </li>
                     )}
+                    {showBtn ? <div>
+                        <input className="list__item" style={{color: "white"}} type="text" placeholder="New Product"  ref={updateItemValue}/>
+                        <button className="mr" onClick={sendNewValue}>Edit</button>
+                    </div> : null}
                 </ul>
+
             </div>
         </div>
         </body>

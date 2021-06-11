@@ -19,21 +19,18 @@ const LoginForm = ({trigger}) => {
     function loginBtn() {
 
         const data2 = {
-
             userLoginEmail: localStorage.getItem("keyBase"),
             userLogin: loginEmailRef.current.value,
             userPswLogin: loginPasswordRef.current.value,
         }
         http.post('/loginUser', data2).then(res => {
             setData2(res)
-            console.log(res)
             localStorage.setItem("keyBase", res.email)
 
 
         })
         http.post('/loginUser', data2).then(res => {
             setError2(res)
-
         })
 
         if (data2.userPswLogin === "" && data2.userLogin === "") {
@@ -55,7 +52,7 @@ const LoginForm = ({trigger}) => {
         </FormContainer>
         <Marginers direction="vertical" margin={10}/>
         <MutedLink style={{margin: "0.4em"}} href="#">Forget your password?</MutedLink>
-        <div>{errMsg}</div>
+        <div style={{color: "red"}}>{errMsg}</div>
         <Marginers direction="vertical"/>
         <SubmitButton style={{margin: "1.9em"}} type="submit" onClick={loginBtn}>Signin</SubmitButton>
         <MutedLink href="#">Don`t have an account? <BoldLink href="#" onClick={trigger}>

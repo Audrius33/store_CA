@@ -26,11 +26,13 @@ const SignupForm = () => {
         }
         http.post('/addUser', data).then(res => {
             setData(res)
+            setError(res.message)
 
         })
-        http.post('/addUser', data).then(res => {
-            setError(res.message)
-        })
+        // http.post('/sendError', data).then(res => {
+        //     setError(res.message)
+        //     console.log(res.message)
+        // })
     }
 
 
