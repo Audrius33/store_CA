@@ -99,9 +99,9 @@ module.exports = {
     },
     updateItem: async (req, res) => {
         console.log(req.body)
-        const {id, item, clientEmail, newValue} = req.body
+        const {clientInfo, newValue} = req.body
 
-        await itemDb.findOneAndUpdate({_id: id}, {$set: {item: newValue}})
+        await itemDb.findOneAndUpdate({_id: clientInfo._id}, {$set: {item: newValue}})
         let oneItem = await itemDb.find()
         res.send({success: true, oneItem})
     }
