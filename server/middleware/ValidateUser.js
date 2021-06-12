@@ -54,8 +54,6 @@ module.exports = {
         if (userPsw1 !== userPsw2) {
             return errorSend(true, 'passwords dont match')
         }
-
         next()
-
     }
 }

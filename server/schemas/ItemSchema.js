@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-
 const Schema2 = mongoose.Schema;
-
 
 const usersSchema = new Schema2({
     item: {
@@ -12,9 +10,7 @@ const usersSchema = new Schema2({
         type: String,
         required: true
     }
-
 })
-
 
 module.exports = mongoose.model("listItemDb", usersSchema)
 

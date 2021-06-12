@@ -1,6 +1,5 @@
 const symbols = "0123456789!@#$%^&*()_>?,.';ąčėįšųūž][\/*"
 
-
 module.exports = {
     validateInput: async (req, res, next) => {
         console.log(req.body)
@@ -22,8 +21,6 @@ module.exports = {
                 return errorSend(true, "Cant use symbols")
             }
         }
-
         next()
     }
-
 }

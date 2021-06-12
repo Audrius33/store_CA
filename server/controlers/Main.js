@@ -16,7 +16,6 @@ module.exports = {
 
         bcrypt.genSalt(saltRounds, function (err, salt) {
             if (err) return next(err);
-
             bcrypt.hash(userPsw1, salt, function (err, hash) {
                 passwordHash = hash
                 if (err) return next(err);
@@ -27,12 +26,10 @@ module.exports = {
                 users.password1 = passwordHash
                 users.password2 = userPsw2
                 users.save().then(data => {
-                    res.send({success: true})
+                    res.send({success: true, message: "A user account was created"})
                 })
             })
         })
-
-
     },
     findUser: async (req, res) => {
         const {
@@ -44,7 +41,6 @@ module.exports = {
 
         bcrypt.genSalt(saltRounds, function (err, salt) {
             if (err) return next(err)
-
             bcrypt.hash(userPswLogin, salt, async function (err, hash) {
                 passwordHash = hash
                 const users = new usersDb
@@ -60,8 +56,6 @@ module.exports = {
                 });
             })
         })
-
-
     },
 
     itemValue: async (req, res) => {
@@ -74,12 +68,8 @@ module.exports = {
         items.item = item
         items.clientEmail = loginEmail
         const findItem = await itemDb.find({clientEmail: loginEmail})
-        // console.log(findItem[0]._id)
 
         items.save().then(async data => {
-            // const findAll = await itemDb.find()
-            // res.send({success: true, findAll, item, itemValue: findItem[0]._id})
-
             res.send({success: true, findItem})
 
         })
@@ -105,5 +95,4 @@ module.exports = {
         let oneItem = await itemDb.find()
         res.send({success: true, oneItem})
     }
-
 }

@@ -17,6 +17,13 @@ const SignupForm = () => {
 
     const {switchToSignIn} = useContext(AccountContext);
 
+    function resetInputFields() {
+        fullNameRef.current.value = ""
+        clientEmailRef.current.value = ""
+        passwordRef1.current.value = ""
+        passwordRef2.current.value = ""
+    }
+
     function sendValue() {
         const data = {
             userName: fullNameRef.current.value,
@@ -29,9 +36,8 @@ const SignupForm = () => {
             setError(res.message)
 
         })
-
+        resetInputFields()
     }
-
 
     return <BoxContainer>
         <FormContainer>
@@ -46,7 +52,6 @@ const SignupForm = () => {
 
         <Marginers direction="vertical"/>
         <SubmitButton style={{margin: "1.9em"}} type="submit" onClick={sendValue}>SignUp</SubmitButton>
-
         <MutedLink href="#">
             Have an account?
             <BoldLink href="#" onClick={switchToSignIn}>

@@ -27,7 +27,6 @@ const LoginForm = ({trigger}) => {
             setData2(res)
             localStorage.setItem("keyBase", res.email)
 
-
         })
         http.post('/loginUser', data2).then(res => {
             setError2(res)
@@ -40,8 +39,6 @@ const LoginForm = ({trigger}) => {
         if (data2.userLogin && data2.userPswLogin) {
             history.push('/Home')
         }
-
-
     }
 
     return <BoxContainer>

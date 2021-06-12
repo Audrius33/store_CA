@@ -3,8 +3,8 @@ import styled from "styled-components";
 import LoginForm from "./loginForm";
 import {motion} from "framer-motion"
 import SignupForm from "./SignupForm";
-export const AccountContext = createContext();
 
+export const AccountContext = createContext();
 
 const BoxContainer = styled.div`
   margin-top: 40px;
@@ -64,7 +64,7 @@ const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 1.8em;
-  
+
 `
 
 const backDropVariants = {
@@ -127,33 +127,33 @@ const AccountBox = () => {
                     />
                     {active === "signIn" && (
                         <HeaderContainer>
-                        <HeaderText>Welcome</HeaderText>
-                        <HeaderText>Back</HeaderText>
-                        <div style={{
-                            color: "white",
-                            fontWeight: "500",
-                            fontSize: "11px",
-                            zIndex: "10",
-                            margin: "0",
-                            marginTop: "6px"
-                        }}>Please sign in to continue
-                        </div>
-                    </HeaderContainer>
-                        )}
+                            <HeaderText>Welcome</HeaderText>
+                            <HeaderText>Back</HeaderText>
+                            <div style={{
+                                color: "white",
+                                fontWeight: "500",
+                                fontSize: "11px",
+                                zIndex: "10",
+                                margin: "0",
+                                marginTop: "6px"
+                            }}>Please sign in to continue
+                            </div>
+                        </HeaderContainer>
+                    )}
                     {active === "signup" && (
                         <HeaderContainer>
-                        <HeaderText>Create</HeaderText>
-                        <HeaderText>Account</HeaderText>
-                        <div style={{
-                            color: "white",
-                            fontWeight: "500",
-                            fontSize: "11px",
-                            zIndex: "10",
-                            margin: "0",
-                            marginTop: "6px"
-                        }}>Please sign-up to continue!
-                        </div>
-                    </HeaderContainer>)}
+                            <HeaderText>Create</HeaderText>
+                            <HeaderText>Account</HeaderText>
+                            <div style={{
+                                color: "white",
+                                fontWeight: "500",
+                                fontSize: "11px",
+                                zIndex: "10",
+                                margin: "0",
+                                marginTop: "6px"
+                            }}>Please sign-up to continue!
+                            </div>
+                        </HeaderContainer>)}
                 </TopContainer>
                 <InnerContainer>
                     {active === "signIn" && <LoginForm trigger={switchToSignup}/>}

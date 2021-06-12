@@ -16,6 +16,7 @@ const Home = () => {
     const [itemIndex, setItemIndex] = useState(0)
     const [error2, setError2] = useState("")
 
+
     useEffect(() => {
         const itemData2 = {
             loginEmail: localStorage.getItem("keyBase")
@@ -25,18 +26,23 @@ const Home = () => {
         })
     }, [items])
 
+    function resetInputFields() {
+        addItem.current.value = ""
+    }
+
 
     function itemValue() {
         const itemData = {
             item: addItem.current.value,
-            loginEmail: localStorage.getItem("keyBase")
+            loginEmail: localStorage.getItem("keyBase"),
         }
 
         http.post('/itemValue', itemData).then(res => {
             addItems(res.findItem)
             setError2(res.message)
-            console.log(res.message)
+
         })
+        resetInputFields()
     }
 
     function removeValue(id) {
@@ -65,7 +71,7 @@ const Home = () => {
             newValue: updateItemValue.current.value
         }
 
-        http.post('/changeItemValue', itemToSend ).then(res => {
+        http.post('/changeItemValue', itemToSend).then(res => {
             addItems(res.oneItem)
             console.log(res.oneItem)
         })
@@ -73,7 +79,6 @@ const Home = () => {
 
     function logClientOut() {
         window.localStorage.removeItem('keyBase');
-
     }
 
     // 94line instead ref use onChange={e => itemNewText(e.target.value)} and call a function 52
@@ -93,7 +98,7 @@ const Home = () => {
                 <button className="submission-line__btn" onClick={itemValue}>Add</button>
                 <div className="errorMsg2" style={{color: "red"}}>{error2}</div>
 
-                { !!items ?  <ul className="list">
+                {!!items ? <ul className="list">
                     {items.map((item, index) =>
                         <li key={index}>
                             <p className="list__item"><a className="list__delete-btn"
@@ -102,11 +107,11 @@ const Home = () => {
                         </li>
                     )}
                     {showBtn ? <div>
-                        <input className="list__item" style={{color: "white"}} type="text" placeholder="New Product"  ref={updateItemValue}/>
+                        <input className="list__item" style={{color: "white"}} type="text" placeholder="New Product"
+                               ref={updateItemValue}/>
                         <button className="mr" onClick={sendNewValue}>Edit</button>
                     </div> : null}
-                </ul> : null }
-
+                </ul> : null}
             </div>
         </div>
         </body>
