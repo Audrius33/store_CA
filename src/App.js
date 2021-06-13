@@ -25,8 +25,8 @@ function App() {
         <AppContainer className="App">
             <Router>
                 <div className="m-20">
-                    <Link className="m-20" to="/login">Login</Link>
-                    <Link className="m-20" to="/home">Home</Link>
+                    <Link className="m-20 tx-none" to="/login">Login</Link>
+                    <Link className="m-20 tx-none" to="/home">Home</Link>
                 </div>
 
                 <Switch>

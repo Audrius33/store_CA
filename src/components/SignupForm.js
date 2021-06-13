@@ -34,6 +34,7 @@ const SignupForm = () => {
         http.post('/addUser', data).then(res => {
             setData(res)
             setError(res.message)
+            console.log(res.message)
 
         })
         resetInputFields()
@@ -47,7 +48,7 @@ const SignupForm = () => {
             <Input ref={passwordRef2} type="password" placeholder="Confirm Password"/>
         </FormContainer>
         <Marginers direction="vertical" margin={10}/>
-        <div style={{color: "red"}}>{error}</div>
+        <div className="errorStyleRed">{error}</div>
         <MutedLink style={{margin: "0.4em"}} href="#">Forget your password?</MutedLink>
 
         <Marginers direction="vertical"/>

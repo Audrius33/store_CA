@@ -4,7 +4,6 @@ import {Marginers} from "../components/marginer/index"
 import http from "../plugins/Fetch"
 import {useHistory} from "react-router-dom"
 
-
 const LoginForm = ({trigger}) => {
 
     const loginEmailRef = useRef()

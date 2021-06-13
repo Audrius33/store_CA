@@ -3,7 +3,6 @@ import './Home.css'
 import http from "../plugins/Fetch";
 import CreateIcon from '@material-ui/icons/Create';
 import ClearIcon from '@material-ui/icons/Clear';
-import {BoxContainer} from "../components/StylesForAcc";
 
 
 const Home = () => {
@@ -29,7 +28,6 @@ const Home = () => {
     function resetInputFields() {
         addItem.current.value = ""
     }
-
 
     function itemValue() {
         const itemData = {
@@ -87,10 +85,10 @@ const Home = () => {
         <body>
         <header>
             <div className="container">
-                <h3 className="header__username">User: {window.localStorage.getItem('keyBase')}</h3>
-                <h1 className="header__title">Shopping List</h1>
+                <h4 className="header__username">User: {window.localStorage.getItem('keyBase')}</h4>
+                <h4 className="header__title">Shopping List</h4>
             </div>
-            <button onClick={logClientOut}>logOut</button>
+            <button className="submission-line__btn2" onClick={logClientOut}>log out</button>
         </header>
         <div className="container">
             <div className="main">
